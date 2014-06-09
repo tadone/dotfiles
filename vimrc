@@ -30,24 +30,31 @@ set encoding=utf-8
 "------------------------------------------------------------
 " Vundle plugins
 
-" If vundle is not installed, do it first
-if (!isdirectory(expand("$HOME/.vim/bundle/vundle")))
-    call system(expand("mkdir -p $HOME/.vim/bundle"))
-    call system(expand("git clone git@github.com:gmarik/vundle $HOME/.vim/bundle/vundle"))
-    echoerr 'Vundle was freshly installed. You should run :PluginInstall'
-endif
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-" Rest of my bundles follows below
-Plugin 'flazz/vim-colorschemes'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
-Plugin 'roryokane/detectindent'
+" Setting up Vundle - the vim plugin bundler
+    let iCanHazVundle=1
+    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+    if !filereadable(vundle_readme)
+        echo "Installing Vundle.."
+        echo ""
+        silent !mkdir -p ~/.vim/bundle
+        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+        let iCanHazVundle=0
+    endif
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+    Bundle 'gmarik/vundle'
+    "Add your bundles here
+     Plugin 'flazz/vim-colorschemes'
+     Plugin 'altercation/vim-colors-solarized'
+     Plugin 'bling/vim-airline'
+     Plugin 'roryokane/detectindent'
+    "...All your other bundles...
+    if iCanHazVundle == 0
+        echo "Installing Bundles, please ignore key map error messages"
+        echo ""
+        :PluginInstall
+    endif
+" Setting up Vundle - the vim plugin bundler end
 
 " Attempt to determine the type of a file based on its name and possibly its
 " contents.  Use this to allow intelligent auto-indenting for each filetype,
