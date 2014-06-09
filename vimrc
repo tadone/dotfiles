@@ -22,8 +22,6 @@ set nocompatible
 " Enable syntax highlighting
 syntax on
 
-set synmaxcol=2048      " Syntax coloring too-long lines is slow
-
 set encoding=utf-8
 
 
@@ -108,11 +106,6 @@ set showcmd
 
 "------------------------------------------------------------
 " Backups
-
-" don't keep swp files
-set noswapfile
-
-
 "------------------------------------------------------------
 " Usability options
 "
@@ -120,6 +113,143 @@ set noswapfile
 " change Vim's behaviour in ways which deviate from the true Vi way, but
 " which are considered to add usability. Which, if any, of these options to
 " use is very much a personal preference, but they are harmless.
+
+" Personal Options Tad Swider
+set history=1000 " Remember more commands and search history
+set nobomb " Set no Byte Order Mark (messes with some editors)
+set modelines=0 " Disable modelines
+set cindent " Indent Comments
+set cinkeys=0{,0},:,!^F,o,O,e " See "cinkeys"; this stops "#" from indenting
+set whichwrap=<,>,[,],h,l " Allows left/right keys to wrap across lines
+set number " Enable line numbering, taking up to 6 characters
+set cpoptions-=n " Don't number a word-wrapped line
+set matchpairs+=<:> " Add angle brackets to pair-matching
+set cursorline " Highlight current line
+set cursorcolumn " Highlight current column
+set nojoinspaces " One space after a "." rather than two
+set fileformat=unix " Set default file format for new files
+set fileformats=unix,dos,mac " Support all three newline formats
+set isk+=_,$,@,%,#,-,?,& " none of these are valid word dividers, so make them not be
+set title " Show title in xterm
+set showmatch " Show matching brackets
+set nobackup " Don't create backup files
+
+" Fix for editing user crontab file
+set backupskip=/tmp/*,/private/tmp/*
+
+set noswapfile " It's 2013, Vim.
+set swapsync=fsync
+set autoread " Automatically re-read files that have been changed externally
+set lazyredraw " Don't redraw while executing macros
+set diffopt=filler,iwhite
+"Show vim mode
+set showmode
+set showcmd
+
+"Use same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬,trail:☠
+
+set synmaxcol=800
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+
+"Set colors / color scheme
+syntax enable
+set t_Co=256
+set background=dark
+let g:solarized_termcolors=256
+"let g:airline_powerline_fonts = 1
+"let g:Powerline_colorscheme='solarized256_dark'
+"let g:solarized_degrade=1
+colorscheme solarized
+
+" Airline configuration >>
+let g:airline_theme = 'tomorrow'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+"let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+" << Airline configuration
+
+
+filetype plugin on " Enable plugins
+
+if version >= 600
+" Vim 6 options
+    set formatoptions=tcroql " colo cduan
+" t - autowrap textwidth
+" c - autowrap comments to textwidth
+" r - autoinsert comment leader with <Enter>
+" q - allow formatting of comments with :gq
+" l - don't format already long lines
+    syn sync fromstart " Increase highlighting accuracy
+else
+    set fo=tcroql
+    syn sync minlines=1000
+endif
+
+if version >= 720
+    set relativenumber
+endif
+
+"" vim 7 omnicompletion
+" doesn't quite work
+if has("autocmd") && exists("omnifunc")
+    autocmd Filetype *
+        if &omnifunc == "" |
+            setlocal omnifunc=syntaxcomplete#Complete |
+        endif
+endif
+
+"Turn on spell checking with English dictionary
+set spell
+set spelllang=en
+set spellsuggest=9 "Only offer 9 spelling suggestions
+
+filetype indent on "Indent depends on file type
+:inoremap # X#
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ exe "normal! g`\"" |
+    \ endif
+
+" Remember info about open buffers on close
+set viminfo^=%
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+    nmap <D-j> <M-j>
+    nmap <D-k> <M-k>
+    vmap <D-j> <M-j>
+    vmap <D-k> <M-k>
+endif
+
+
+" Save when losing focus
+au FocusLost * :silent! wall
+
+" Resize splits when the window is resized
+au VimResized * :wincmd =
 
 " Use case insensitive search, except when using capital letters
 set ignorecase
