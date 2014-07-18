@@ -4,8 +4,8 @@ dotfiles
 Collection of my dotfiles
 Installation:
 
-git clone git://github.com/pkutzner/dotvim.git ~/.vim
+git clone git://github.com/tadone/dotfiles.git ~/.dotfiles
 
 Create symlinks:
 
-ln -s ~/.vim/vimrc ~/.vimrc
+ln -s ~/.dotfiles/vimrc ~/.vimrc
