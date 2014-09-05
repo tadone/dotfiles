@@ -170,7 +170,7 @@ set background=dark
 
 " Airline
 "let g:airline_powerline_fonts = 1
-let g:airline_theme='ubaryd'
+let g:airline_theme='zenburn'
 
 let g:airline_section_b = '%{getcwd()}'
 let g:airline_section_c = '%t'
