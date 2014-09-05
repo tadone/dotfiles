@@ -165,7 +165,7 @@ set ttimeoutlen=10
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set t_Co=256
-colorscheme solazrized
+colorscheme solarized
 set background=dark
 
 " Airline
