@@ -20,6 +20,7 @@
     Plugin 'flazz/vim-colorschemes'
     Plugin 'altercation/vim-colors-solarized'
     Plugin 'bling/vim-airline'
+    Plugin 'scrooloose/nerdtree'
     "...All your other bundles...
     if iCanHazVundle == 0
         echo "Installing Bundles, please ignore key map error messages"
@@ -603,3 +604,6 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <leader>v <C-w>v
 " }}}
+
+"" NerdTREE Toggle to Ctrl+n ""
+map <C-n> :NERDTreeToggle<CR>
