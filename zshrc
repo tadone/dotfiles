@@ -11,10 +11,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-set t_Co=256
-# MacPorts Installer addition on 2013-10-10_at_14:15:58: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:/Users/tadswider/bin:/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/:$PATH
-export LSCOLORS="exfxcxdxbxegedabagacad"
+
 expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
   echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
   zle expand-or-complete
@@ -32,7 +29,6 @@ alias here='open .'
 alias top='top -o cpu'
 alias seq='/opt/local/bin/gseq'
 alias lshidden='ls -dA .??*'
-alias gam='python $HOME/scripts/Google_Apps_Manager/gam.py'
 alias less='less -R'
 alias more='more -R'
 alias nssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -q' 
@@ -48,5 +44,4 @@ alias ssh_config='$EDITOR ~/.ssh/config'
 alias outdated='port outdated'
 alias diff='colordiff "$@"'
 alias strip-ansi='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"'
-alias burn='hdutil burn -verifyburn -eject "$@"'
 alias flushdns='sudo killall -HUP mDNSResponder'
