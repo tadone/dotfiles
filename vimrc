@@ -6,6 +6,21 @@
 set nocompatible
 filetype off
 
+let vundleInstalled=0 
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+     silent !mkdir -p ~/.vim/bundle/
+     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+     let vundleInstalled=1
+endif
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+...
+if vundleInstalled == 1
+     :PluginInstall
+endif
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
