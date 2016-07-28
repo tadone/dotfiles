@@ -12,8 +12,8 @@ ln -s ~/.dotfiles/vimrc ~/.vimrc
 
 To get just a single file like vimrc:
 
-<code>wget https://github.com/tadone/dotfiles-tad/raw/master/vimrc -O .vimrc<code>
+<code>wget https://github.com/tadone/dotfiles-tad/raw/master/vimrc -O .vimrc</code>
 
 or 
 
-curl https://github.com/tadone/dotfiles-tad/raw/master/vimrc 
+<code>curl https://github.com/tadone/dotfiles-tad/raw/master/vimrc </code>
