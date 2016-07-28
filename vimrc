@@ -16,7 +16,7 @@ endif
 filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-...
+
 if vundleInstalled == 1
      :PluginInstall
 endif
