@@ -11,7 +11,8 @@ Create symlinks:
 ln -s ~/.dotfiles/vimrc ~/.vimrc
 
 To get just a single file like vimrc:
-wget https://github.com/tadone/dotfiles-tad/raw/master/vimrc -O .vimrc
+
+<code>wget https://github.com/tadone/dotfiles-tad/raw/master/vimrc -O .vimrc<code>
 
 or 
 
