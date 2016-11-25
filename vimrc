@@ -66,6 +66,7 @@ set showmode
 set smarttab
 set scrolloff=5
 set lazyredraw
+set showbreak=↪
 
 set clipboard=unnamed
 if has('unnamedplus')
