@@ -127,6 +127,21 @@ set winminheight=0             " Allow windows to be squashed
 " (required by Vundle)
 filetype off
 
+" Auto-install Vundle if not installed
+let vundleInstalled=0 
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+     silent !mkdir -p ~/.vim/bundle/
+     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+     let vundleInstalled=1
+endif
+filetype off
+
+" Install Vundle Plugins on Vundle auto-install
+if vundleInstalled == 1
+     :PluginInstall
+endif
+
 " Set the runtime path to include Vundle
 set runtimepath+=~/.vim/plugins/Vundle.vim
 
@@ -135,40 +150,18 @@ set runtimepath+=~/.vim/plugins/Vundle.vim
 call vundle#begin('~/.vim/plugins')
 
     " Let Vundle manage Vundle (this is important!)
-    Plugin 'gmarik/Vundle.vim'
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'godlygeek/tabular'
-    Plugin 'nathanaelkane/vim-indent-guides'
-    Plugin 'plasticboy/vim-markdown'
-    Plugin 'raimondi/delimitmate'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'scrooloose/syntastic'
-    Plugin 'shougo/neocomplcache.vim'
-    Plugin 'tpope/vim-commentary'
-    Plugin 'tpope/vim-fugitive'
-    Plugin 'tpope/vim-repeat'
-    Plugin 'tpope/vim-surround'
-
+    Plugin 'gmarik/Vundle.vim' " Main Vungle
+    Plugin 'scrooloose/nerdtree' " File browser sidebar
+    "Plugin 'nathanaelkane/vim-indent-guides' " Visually show indents
+    Plugin 'raimondi/delimitmate' " Auto close parenthesis
+    Plugin 'tpope/vim-surround' " Change parentheses, brackets, quotes, XML tags
+    Plugin 'scrooloose/syntastic' " Syntax checker
+    Plugin 'maxboisvert/vim-simple-complete' " Simple autocompletion plugin
+    Plugin 'airblade/vim-gitgutter' " Show Git diff in "gutter" + and - signs.
+    
 call vundle#end()
 
 filetype on
-
-
-" ----------------------------------------------------------------------
-" | Plugins - Emmet                                                    |
-" ----------------------------------------------------------------------
-
-" Redefine trigger key for Emmet
-" http://docs.emmet.io/cheat-sheet/
-
-let g:user_emmet_leader_key='<C-E>'
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" Load custom Emmet snippets
-" http://docs.emmet.io/customization/snippets/
-
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.vim/snippets/emmet.json')), "\n"))
 
 
 " ----------------------------------------------------------------------
@@ -190,29 +183,19 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven
 
 
 " ----------------------------------------------------------------------
-" | Plugins - Markdown                                                 |
-" ----------------------------------------------------------------------
-
-" Disable Folding
-" https://github.com/plasticboy/vim-markdown#disable-folding
-
-let g:vim_markdown_folding_disabled=1
-
-
-" ----------------------------------------------------------------------
 " | Plugins - NeoComplCache                                            |
 " ----------------------------------------------------------------------
 
 " Enable `neocomplcache` by default
 " https://github.com/Shougo/neocomplcache.vim#installation
 
-let g:neocomplcache_enable_at_startup=1
+"let g:neocomplcache_enable_at_startup=1
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 " Make `<TAB>` autocomplete
 
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " ----------------------------------------------------------------------
@@ -222,15 +205,15 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " Inform Syntastic which checkers to use based on file types
 " https://github.com/scrooloose/syntastic#3-faq
 
-let g:syntastic_html_checkers = [ 'jshint' ]
-let g:syntastic_javascript_checkers = [ 'jshint' ]
+"let g:syntastic_html_checkers = [ 'jshint' ]
+"let g:syntastic_javascript_checkers = [ 'jshint' ]
 
 " Disable syntax checking by default
-let g:syntastic_mode_map = {
-    \ 'active_filetypes': [],
-    \ 'mode': 'passive',
-    \ 'passive_filetypes': []
-\}
+"let g:syntastic_mode_map = {
+"    \ 'active_filetypes': [],
+"    \ 'mode': 'passive',
+"    \ 'passive_filetypes': []
+"\}
 
 
 " ----------------------------------------------------------------------
