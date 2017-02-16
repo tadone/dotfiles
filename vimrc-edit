@@ -117,51 +117,24 @@ set winminheight=0             " Allow windows to be squashed
 
 
 " ----------------------------------------------------------------------
-" | Plugins                                                            |
+" | Plugins - Plug                                                     |
 " ----------------------------------------------------------------------
 
-" Use Vundle to manage the vim plugins
-" https://github.com/gmarik/Vundle.vim
+" Use Plug to manage plugins
+" Specify a directory for plugins 
+call plug#begin('~/.vim/plugged')
 
-" Disable file type detection
-" (required by Vundle)
-filetype off
-
-" Auto-install Vundle if not installed
-let vundleInstalled=0 
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-     silent !mkdir -p ~/.vim/bundle/
-     silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-     let vundleInstalled=1
-endif
-filetype off
-
-" Install Vundle Plugins on Vundle auto-install
-if vundleInstalled == 1
-     :PluginInstall
-endif
-
-" Set the runtime path to include Vundle
-set runtimepath+=~/.vim/plugins/Vundle.vim
-
-" Initialize Vundle and specify the path
-" where the plugins should be installed
-call vundle#begin('~/.vim/plugins')
-
-    " Let Vundle manage Vundle (this is important!)
-    Plugin 'gmarik/Vundle.vim' " Main Vungle
-    Plugin 'scrooloose/nerdtree' " File browser sidebar
-    "Plugin 'nathanaelkane/vim-indent-guides' " Visually show indents
-    Plugin 'raimondi/delimitmate' " Auto close parenthesis
-    Plugin 'tpope/vim-surround' " Change parentheses, brackets, quotes, XML tags
-    Plugin 'scrooloose/syntastic' " Syntax checker
-    Plugin 'maxboisvert/vim-simple-complete' " Simple autocompletion plugin
-    Plugin 'airblade/vim-gitgutter' " Show Git diff in "gutter" + and - signs.
+    Plug 'junegunn/vim-easy-align' " Easy allign
+    Plug 'scrooloose/nerdtree' " File browser sidebar
+    Plug 'nathanaelkane/vim-indent-guides' " Visually show indents
+    Plug 'raimondi/delimitmate' " Auto close parenthesis
+    Plug 'tpope/vim-surround' " Change parentheses, brackets, quotes, XML tags
+    Plug 'scrooloose/syntastic' " Syntax checker
+    Plug 'maxboisvert/vim-simple-complete' " Simple autocompletion plugin
+    Plug 'airblade/vim-gitgutter' " Show Git diff in "gutter" + and - signs.
     
-call vundle#end()
-
-filetype on
+" Initialize plugin system
+call plug#end()
 
 
 " ----------------------------------------------------------------------
