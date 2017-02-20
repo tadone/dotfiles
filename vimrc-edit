@@ -171,43 +171,31 @@ call plug#begin('~/.vim/plugged')
     Plug 'altercation/solarized' " Solarized theme
     "Plug 'chriskempson/base16-vim' " Base16 Themes
     Plug 'scrooloose/nerdtree' " File browser sidebar
-    Plug 'nathanaelkane/vim-indent-guides' " Visually show indents
+    Plug 'itchyny/lightline.vim' " Lightline
     Plug 'raimondi/delimitmate' " Auto close parenthesis
     Plug 'tpope/vim-surround' " Change parentheses, brackets, quotes, XML tags
     Plug 'scrooloose/syntastic' " Syntax checker
-    Plug 'maxboisvert/vim-simple-complete' " Simple autocompletion plugin
+    Plug 'Shougo/neocomplete' " Auto completion
     Plug 'airblade/vim-gitgutter' " Show Git diff in "gutter" + and - signs.
     
 " Initialize plugin system
 call plug#end()
 
-
 " ----------------------------------------------------------------------
-" | Plugins - Indent Guides                                            |
-" ----------------------------------------------------------------------
-
-" Set custom indent colors
-" https://github.com/nathanaelkane/vim-indent-guides#setting-custom-indent-colors
-
-let g:indent_guides_auto_colors = 0
-
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd
-        \ guibg=#00323D
-        \ ctermbg=Magenta
-
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven
-        \ guibg=#073642
-        \ ctermbg=DarkMagenta
-
-
-" ----------------------------------------------------------------------
-" | Plugins - NeoComplCache                                            |
+" | Plugins - NeoComplete                                              |
 " ----------------------------------------------------------------------
 
-" Enable `neocomplcache` by default
-" https://github.com/Shougo/neocomplcache.vim#installation
-
-"let g:neocomplcache_enable_at_startup=1
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -236,6 +224,18 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_sh_checkers = ['sh', 'shellcheck', 'checkbashisms']
 let g:syntastic_aggregate_errors = 1 " Display errors from all checkers
 
+" ----------------------------------------------------------------------
+" | Plugins - Lightline                                                |
+" ----------------------------------------------------------------------
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '|', 'right': '|' }
+      \ }
+      
 " ----------------------------------------------------------------------
 " | Helper Functions                                                   |
 " ----------------------------------------------------------------------
@@ -267,24 +267,6 @@ function! StripTrailingWhitespaces()
     " Restore previous search history and cursor position
     let @/ = searchHistory
     call cursor(cursorLine, cursorColumn)
-
-endfunction
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-function! ToggleLimits()
-
-    " [51,73]
-    "   - git commit message
-    "     http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-    " [81]
-    "   - general use
-
-    if ( &colorcolumn == '73' )
-        set colorcolumn+=51,81
-    else
-        set colorcolumn-=51,81
-    endif
 
 endfunction
 
@@ -518,17 +500,3 @@ set statusline+=\ (%P)\        " Percent through file
 " Example result:
 "
 "  [1] [master] [vim/vimrc][vim][unix:utf-8]            17,238/381 (59%)
-
-
-" ----------------------------------------------------------------------
-" | Local Settings                                                     |
-" ----------------------------------------------------------------------
-
-" Load local settings if they exist
-"
-" Note: The following needs to be included last in order to allow
-"       any of the above settings to be overwritten by local ones
-
-if filereadable(glob('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
