@@ -19,8 +19,23 @@ set backspace=indent           " ┐
 set backspace+=eol             " │ Allow `backspace`
 set backspace+=start           " ┘ in insert mode
 
-!mkdir -p ~/.vim/backups       " Create dir if not exists
-set backupdir=~/.vim/backups   " Set directory for backup files
+" Save temporary/backup files not in the local directory, but in your ~/.vim
+" directory, to keep them out of git repos. 
+" But first mkdir backup, swap, and undo first to make this work
+call system('mkdir ~/.vim')
+call system('mkdir ~/.vim/backup')
+call system('mkdir ~/.vim/swap')
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    call system('mkdir ~/.vim/undo')
+    set undodir=~/.vim/undo//
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
 
 set backupskip=/tmp/*          " ┐ Don't create backups
 set backupskip+=/private/tmp/* " ┘ for certain files
@@ -70,7 +85,7 @@ set nojoinspaces               " When using the join command,
 set nostartofline              " Kept the cursor on the same column
 set number                     " Show line number
 
-set numberwidth=5              " Increase the minimal number of
+set numberwidth=3              " Increase the minimal number of
                                " columns used for the `line number`
 
 set report=0                   " Report the number of lines changed
@@ -100,9 +115,6 @@ set expandtab                  " ┘
 
 set ttyfast                    " Enable fast terminal connection
 
-!mkdir -p ~/.vim/undos         " Create dir if not exists 
-set undodir=~/.vim/undos       " Set directory for undo files
-set undofile                   " Automatically save undo history
 "set virtualedit=all            " Allow cursor to be anywhere
 
 set visualbell                 " ┐
@@ -117,8 +129,6 @@ set wildmenu                   " Enable enhanced command-line
                                " match highlighted)
 
 set winminheight=0             " Allow windows to be squashed
-
-fileformats=unix,dos,mac
 
 " ----------------------------------------------------------------------
 " | Color Scheme                                                       |
@@ -145,12 +155,20 @@ colorscheme solarized          " Use custom color scheme
 " ----------------------------------------------------------------------
 " | Plugins - Plug                                                     |
 " ----------------------------------------------------------------------
+" vim-plug (https://github.com/junegunn/vim-plug) settings 
+" Automatically install vim-plug and run PlugInstall if vim-plug not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
 " Use Plug to manage plugins
 " Specify a directory for plugins 
 call plug#begin('~/.vim/plugged')
 
-    Plug 'junegunn/vim-easy-align' " Easy allign
+    Plug 'altercation/solarized' " Solarized theme
+    "Plug 'chriskempson/base16-vim' " Base16 Themes
     Plug 'scrooloose/nerdtree' " File browser sidebar
     Plug 'nathanaelkane/vim-indent-guides' " Visually show indents
     Plug 'raimondi/delimitmate' " Auto close parenthesis
