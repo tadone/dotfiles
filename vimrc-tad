@@ -145,8 +145,8 @@ endif
 " Specify a directory for plugins 
 call plug#begin('~/.vim/plugged')
 
-    Plug 'altercation/vim-colors-solarized' " Solarized theme
-    "Plug 'chriskempson/base16-vim' " Base16 Themes
+    "Plug 'altercation/vim-colors-solarized' " Solarized theme
+    Plug 'lifepillar/vim-solarized8' " Solarized8 theme
     Plug 'scrooloose/nerdtree' " File browser sidebar
     Plug 'itchyny/lightline.vim' " Lightline
     Plug 'raimondi/delimitmate' " Auto close parenthesis
@@ -178,7 +178,7 @@ if !has('gui_running')
     let g:solarized_visibility = 'high'
 endif
 
-colorscheme solarized          " Use custom color scheme
+colorscheme solarized8_dark_high " Use custom color scheme
 
 " ----------------------------------------------------------------------
 " | Plugins - NeoComplete                                              |
@@ -220,7 +220,7 @@ let g:syntastic_aggregate_errors = 1 " Display errors from all checkers
 " | Plugins - Lightline                                                |
 " ----------------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'seoul256',
       \ 'component': {
       \   'readonly': '%{&readonly?"x":""}',
       \ },
