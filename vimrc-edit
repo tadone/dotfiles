@@ -76,7 +76,6 @@ set listchars+=eol:↴           " │ represent invisible characters
 set listchars+=nbsp:_          " ┘
 
 set magic                      " Enable extended regexp
-set hide                       " Hide mouse pointer while typing
 set noerrorbells               " Disable error bells
 
 set nojoinspaces               " When using the join command,
@@ -132,28 +131,6 @@ set wildmenu                   " Enable enhanced command-line
 set winminheight=0             " Allow windows to be squashed
 
 " ----------------------------------------------------------------------
-" | Color Scheme                                                       |
-" ----------------------------------------------------------------------
-
-set t_Co=256                   " Enable full-color support
-
-set background=dark            " Use colors that look good
-                               " on a dark background
-
-" Set custom configurations for when the
-" Solarized theme is used from vim's Terminal mode
-" http://ethanschoonover.com/solarized/vim-colors-solarized#advanced-configuration
-
-if !has('gui_running')
-    let g:solarized_contrast = 'high'
-    let g:solarized_termcolors = 256
-    let g:solarized_termtrans = 1
-    let g:solarized_visibility = 'high'
-endif
-
-colorscheme solarized          " Use custom color scheme
-
-" ----------------------------------------------------------------------
 " | Plugins - Plug                                                     |
 " ----------------------------------------------------------------------
 " vim-plug (https://github.com/junegunn/vim-plug) settings 
@@ -180,6 +157,28 @@ call plug#begin('~/.vim/plugged')
     
 " Initialize plugin system
 call plug#end()
+
+" ----------------------------------------------------------------------
+" | Color Scheme                                                       |
+" ----------------------------------------------------------------------
+
+set t_Co=256                   " Enable full-color support
+
+set background=dark            " Use colors that look good
+                               " on a dark background
+
+" Set custom configurations for when the
+" Solarized theme is used from vim's Terminal mode
+" http://ethanschoonover.com/solarized/vim-colors-solarized#advanced-configuration
+
+if !has('gui_running')
+    let g:solarized_contrast = 'high'
+    let g:solarized_termcolors = 256
+    let g:solarized_termtrans = 1
+    let g:solarized_visibility = 'high'
+endif
+
+colorscheme solarized          " Use custom color scheme
 
 " ----------------------------------------------------------------------
 " | Plugins - NeoComplete                                              |
