@@ -19,6 +19,7 @@ set backspace=indent           " ┐
 set backspace+=eol             " │ Allow `backspace`
 set backspace+=start           " ┘ in insert mode
 
+!mkdir -p ~/.vim/backups       " Create dir if not exists
 set backupdir=~/.vim/backups   " Set directory for backup files
 
 set backupskip=/tmp/*          " ┐ Don't create backups
@@ -49,7 +50,7 @@ set incsearch                  " Highlight search pattern as
 set laststatus=2               " Always show the status line
 
 set lazyredraw                 " Do not redraw the screen while
-                               " executing macros, registers
+                               " executing ros, registers
                                " and other commands that have
                                " not been typed
 
@@ -59,7 +60,7 @@ set listchars+=eol:↴           " │ represent invisible characters
 set listchars+=nbsp:_          " ┘
 
 set magic                      " Enable extended regexp
-set mousehide                  " Hide mouse pointer while typing
+set hide                       " Hide mouse pointer while typing
 set noerrorbells               " Disable error bells
 
 set nojoinspaces               " When using the join command,
@@ -98,9 +99,11 @@ set shiftwidth=4               " │ http://vimcasts.org/e/2
 set expandtab                  " ┘
 
 set ttyfast                    " Enable fast terminal connection
+
+!mkdir -p ~/.vim/undos         " Create dir if not exists 
 set undodir=~/.vim/undos       " Set directory for undo files
 set undofile                   " Automatically save undo history
-set virtualedit=all            " Allow cursor to be anywhere
+"set virtualedit=all            " Allow cursor to be anywhere
 
 set visualbell                 " ┐
 set noerrorbells               " │ Disable beeping and window flashing
@@ -115,6 +118,29 @@ set wildmenu                   " Enable enhanced command-line
 
 set winminheight=0             " Allow windows to be squashed
 
+fileformats=unix,dos,mac
+
+" ----------------------------------------------------------------------
+" | Color Scheme                                                       |
+" ----------------------------------------------------------------------
+
+set t_Co=256                   " Enable full-color support
+
+set background=dark            " Use colors that look good
+                               " on a dark background
+
+" Set custom configurations for when the
+" Solarized theme is used from vim's Terminal mode
+" http://ethanschoonover.com/solarized/vim-colors-solarized#advanced-configuration
+
+if !has('gui_running')
+    let g:solarized_contrast = 'high'
+    let g:solarized_termcolors = 256
+    let g:solarized_termtrans = 1
+    let g:solarized_visibility = 'high'
+endif
+
+colorscheme solarized          " Use custom color scheme
 
 " ----------------------------------------------------------------------
 " | Plugins - Plug                                                     |
@@ -178,16 +204,18 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven
 " Inform Syntastic which checkers to use based on file types
 " https://github.com/scrooloose/syntastic#3-faq
 
-"let g:syntastic_html_checkers = [ 'jshint' ]
-"let g:syntastic_javascript_checkers = [ 'jshint' ]
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" Disable syntax checking by default
-"let g:syntastic_mode_map = {
-"    \ 'active_filetypes': [],
-"    \ 'mode': 'passive',
-"    \ 'passive_filetypes': []
-"\}
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
+" Set sh, shellcheck, and checkbashisms as checkers
+let g:syntastic_sh_checkers = ['sh', 'shellcheck', 'checkbashisms']
+let g:syntastic_aggregate_errors = 1 " Display errors from all checkers
 
 " ----------------------------------------------------------------------
 " | Helper Functions                                                   |
@@ -330,34 +358,15 @@ endif
 
 
 " ----------------------------------------------------------------------
-" | Color Scheme                                                       |
-" ----------------------------------------------------------------------
-
-set t_Co=256                   " Enable full-color support
-
-set background=dark            " Use colors that look good
-                               " on a dark background
-
-" Set custom configurations for when the
-" Solarized theme is used from vim's Terminal mode
-" http://ethanschoonover.com/solarized/vim-colors-solarized#advanced-configuration
-
-if !has('gui_running')
-    let g:solarized_contrast = 'high'
-    let g:solarized_termcolors = 256
-    let g:solarized_termtrans = 1
-    let g:solarized_visibility = 'high'
-endif
-
-colorscheme solarized          " Use custom color scheme
-
-
-" ----------------------------------------------------------------------
 " | Key Mappings                                                       |
 " ----------------------------------------------------------------------
 
 " Use a different mapleader (default is '\')
 let mapleader = ','
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" [cc] Exit the insert mode
+inoremap <C-c> <Esc>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -380,12 +389,6 @@ nmap <leader>cr 0yt=A<C-r>=<C-r>"<CR><Esc>
 
 " [,cs] Clear search
 map <leader>cs <Esc>:noh<CR>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" [,h ] JSHint the code
-" https://github.com/Shutnik/jshint2.vim
-nmap <leader>h :JSHint<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
