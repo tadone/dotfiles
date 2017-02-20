@@ -145,7 +145,7 @@ endif
 " Specify a directory for plugins 
 call plug#begin('~/.vim/plugged')
 
-    Plug 'altercation/solarized' " Solarized theme
+    Plug 'altercation/vim-colors-solarized' " Solarized theme
     "Plug 'chriskempson/base16-vim' " Base16 Themes
     Plug 'scrooloose/nerdtree' " File browser sidebar
     Plug 'itchyny/lightline.vim' " Lightline
