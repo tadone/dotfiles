@@ -281,7 +281,7 @@ let g:syntastic_aggregate_errors = 1 " Display errors from all checkers
 " | Plugins - Lightline                                                |
 " ----------------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'onedark',
       \ 'component': {
       \   'readonly': '%{&readonly?"x":""}',
       \ },
