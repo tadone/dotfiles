@@ -51,7 +51,7 @@ set cpoptions+=$               " When making a change, don't
                                " put a `$` sign at the end of
                                " the changed text
 
-"let &colorcolumn=join(range(120,999),",")
+let &colorcolumn=join(range(120,999),",")
 "set colorcolumn=73             " Highlight certain column(s)
 set cursorline                 " Highlight the current line
 set directory=~/.vim/swaps     " Set directory for swap files
@@ -133,6 +133,35 @@ set wildmenu                   " Enable enhanced command-line
                                " match highlighted)
 
 set winminheight=0             " Allow windows to be squashed
+
+" Press space bar to turn off search highlighting and clear any message displayed
+nnoremap <silent><Space> :nohlsearch<Bar>:echo<CR>
+
+" when indenting with < and >, make it easy to repeat
+vnoremap < <gv
+vnoremap > >gv
+
+" move to end of pasted text, to ease multiple pastes
+vnoremap y y`]
+vnoremap p p`]
+nnoremap p p`]
+
+set cindent " Indent Comments
+set cinkeys=0{,0},:,!^F,o,O,e " See "cinkeys"; this stops "#" from indenting
+set cpoptions-=n " Don't number a word-wrapped line
+
+set fileformat=unix " Set default file format for new files
+set fileformats=unix,dos,mac " Support all three newline formats
+set autoread " Automatically re-read files that have been changed externally
+
+"Turn on spell checking with English dictionary
+set spell
+set spelllang=en
+set spellsuggest=4 "Only offer 9 spelling suggestions
+
+" Syntax highlight shell scripts as per POSIX,
+" not the original Bourne shell which very few use
+let g:is_posix = 1
 
 " ----------------------------------------------------------------------
 " | Plugins - Plug                                                     |
@@ -250,35 +279,12 @@ let g:syntastic_aggregate_errors = 1 " Display errors from all checkers
 " ----------------------------------------------------------------------
 " | Plugins - Lightline                                                |
 " ----------------------------------------------------------------------
-"let g:lightline = {
-"      \ 'colorscheme': 'wombat',
-"      \ 'component': {
-"      \   'readonly': '%{&readonly?"x":""}',
-"      \ },
-"      \ 'separator': { 'left': '', 'right': '' },
-"      \ 'subseparator': { 'left': '|', 'right': '|' }
-"      \ }
 let g:lightline = {
       \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ 'component': {
+      \   'readonly': '%{&readonly?"x":""}',
       \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
-      \   'filename': 'LightlineFilename',
-      \   'fileformat': 'LightlineFileformat',
-      \   'filetype': 'LightlineFiletype',
-      \   'fileencoding': 'LightlineFileencoding',
-      \   'mode': 'LightlineMode',
-      \   'ctrlpmark': 'CtrlPMark',
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
-      \ },
+      \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
 
@@ -412,7 +418,7 @@ endif
 let mapleader = ','
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-" [cc] Exit the insert mode
+" [Ctrl-c] Exit the insert mode
 inoremap <C-c> <Esc>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
