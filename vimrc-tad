@@ -180,7 +180,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'altercation/vim-colors-solarized' " Solarized theme
     Plug 'joshdick/onedark.vim' "Great Atom inspired theme
-    "Plug 'lifepillar/vim-solarized8'
+    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'for': 'sh' } " Snippets
     "Plug 'chriskempson/base16-vim' " Base16 Themes
     Plug 'scrooloose/nerdtree' " File browser sidebar
     Plug 'itchyny/lightline.vim' " Lightline
@@ -288,6 +288,14 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
+" ----------------------------------------------------------------------
+" | Plugins - UltiSnips                                                |
+" ----------------------------------------------------------------------
+
+" Trigger configuration.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ----------------------------------------------------------------------
 " | Helper Functions                                                   |
