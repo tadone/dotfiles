@@ -178,9 +178,9 @@ endif
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-    Plug 'altercation/vim-colors-solarized' " Solarized theme
+    "Plug 'altercation/vim-colors-solarized' " Solarized theme
     Plug 'joshdick/onedark.vim' "Great Atom inspired theme
-    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'for': 'sh' } " Snippets
+    "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'for': 'sh' } " Snippets
     "Plug 'chriskempson/base16-vim' " Base16 Themes
     Plug 'scrooloose/nerdtree' " File browser sidebar
     Plug 'itchyny/lightline.vim' " Lightline
