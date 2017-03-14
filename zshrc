@@ -39,3 +39,4 @@ alias bashrc='$EDITOR ~/.bashrc && source ~/.bashrc'
 alias ssh_config='$EDITOR ~/.ssh/config'
 alias diff='colordiff "$@"'
 
+alias dps='docker ps'
