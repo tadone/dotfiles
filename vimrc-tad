@@ -54,7 +54,6 @@ set cpoptions+=$               " When making a change, don't
 let &colorcolumn=join(range(120,999),",")
 "set colorcolumn=73             " Highlight certain column(s)
 set cursorline                 " Highlight the current line
-set directory=~/.vim/swaps     " Set directory for swap files
 set encoding=utf-8 nobomb      " Use UTF-8 without BOM
 set history=5000               " Increase command line history
 set hlsearch                   " Enable search highlighting
@@ -161,7 +160,7 @@ set spellsuggest=4 "Only offer 9 spelling suggestions
 
 " Syntax highlight shell scripts as per POSIX,
 " not the original Bourne shell which very few use
-let g:is_posix = 1
+"let g:is_posix = 1
 
 " ----------------------------------------------------------------------
 " | Plugins - Plug                                                     |
@@ -178,11 +177,12 @@ endif
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-    "Plug 'altercation/vim-colors-solarized' " Solarized theme
+    Plug 'altercation/vim-colors-solarized' " Solarized theme
+    Plug 'arcticicestudio/nord-vim' "NORD Theme
     Plug 'joshdick/onedark.vim' "Great Atom inspired theme
     "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'for': 'sh' } " Snippets
     "Plug 'chriskempson/base16-vim' " Base16 Themes
-    Plug 'scrooloose/nerdtree' " File browser sidebar
+    "Plug 'scrooloose/nerdtree' " File browser sidebar
     Plug 'itchyny/lightline.vim' " Lightline
     Plug 'raimondi/delimitmate' " Auto close parenthesis
     Plug 'tpope/vim-surround' " Change parentheses, brackets, quotes, XML tags
@@ -197,9 +197,9 @@ call plug#end()
 " | Color Scheme                                                       |
 " ----------------------------------------------------------------------
 
-set t_Co=256                   " Enable full-color support
+"set t_Co=256                   " Enable full-color support
 
-set background=dark            " Use colors that look good
+"set background=dark            " Use colors that look good
                                " on a dark background
 
 " Set custom configurations for when the
@@ -216,17 +216,17 @@ set background=dark            " Use colors that look good
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799
-  "Based on Vim patch 7.4.1770 (`guicolors` option)
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+"if (empty($TMUX))
+"  if (has("nvim"))
+"    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"  endif
+"  "For Neovim > 0.1.5 and Vim > patch 7.4.1799
+"  "Based on Vim patch 7.4.1770 (`guicolors` option)
+"  if (has("termguicolors"))
+"    set termguicolors
+"  endif
+"endif
 
 " onedark.vim override: Don't set a background color when running in a
 " terminal;
@@ -293,10 +293,10 @@ let g:lightline = {
 " ----------------------------------------------------------------------
 
 " Trigger configuration.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
 " ----------------------------------------------------------------------
 " | Helper Functions                                                   |
 " ----------------------------------------------------------------------
@@ -333,15 +333,6 @@ endfunction
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function! ToggleRelativeLineNumbers()
-
-    if ( &relativenumber == 1 )
-        set number
-    else
-        set relativenumber
-    endif
-
-endfunction
 
 
 " ----------------------------------------------------------------------
@@ -358,39 +349,16 @@ if has('autocmd')
     " Automatically reload the configurations from the
     " `~/.vimrc` and `~/.gvimrc` files whenever they are changed
 
-    augroup auto_reload_vim_configs
+    "augoup auto_reload_vim_configs
 
-        autocmd!
-        autocmd BufWritePost vimrc source $MYVIMRC
+    "    autocmd!
+    "    autocmd BufWritePost vimrc source $MYVIMRC
 
-        if has('gui_running')
-            autocmd BufWritePost gvimrc source $MYGVIMRC
-        endif
+    "    if has('gui_running')
+    "        autocmd BufWritePost gvimrc source $MYGVIMRC
+    "    endif
 
-    augroup END
-
-    " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    " Use relative line numbers
-    " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
-
-    augroup relative_line_numbers
-
-        autocmd!
-
-        " Automatically switch to absolute line numbers when vim loses focus
-        autocmd FocusLost * :set number
-
-        " Automatically switch to relative line numbers when vim gains focus
-        autocmd FocusGained * :set relativenumber
-
-        " Automatically switch to absolute line numbers when vim is in insert mode
-        autocmd InsertEnter * :set number
-
-        " Automatically switch to relative line numbers when vim is in normal mode
-        autocmd InsertLeave * :set relativenumber
-
-    augroup END
+    "augroup END
 
     " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
