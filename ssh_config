@@ -1,0 +1,16 @@
+### default for all ##
+Host *
+     ForwardAgent no
+     ForwardX11 no
+     ForwardX11Trusted yes
+     #User nixcraft
+     #Port 22
+     #Protocol 2
+     ServerAliveInterval 60
+     ServerAliveCountMax 30
+     StrictHostKeyChecking no
+     UserKnownHostsFile /dev/null
+     LogLevel QUIET
+
+## override as per host ##
+#Host server1
