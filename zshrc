@@ -21,14 +21,14 @@ zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
 # Tmux reatach to existing session
-if [[ -z "$TMUX" ]] ;then
-     ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-     if [[ -z "$ID" ]] ;then # if not available create a new one
-         tmux new-session
-     else
-         tmux attach-session -t "$ID" # if available attach to it
-     fi
-fi
+# if [[ -z "$TMUX" ]] ;then
+#      ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
+#      if [[ -z "$ID" ]] ;then # if not available create a new one
+#          tmux new-session
+#      else
+#          tmux attach-session -t "$ID" # if available attach to it
+#      fi
+# fi
 
 # Aliases
 alias nssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -q'
