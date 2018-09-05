@@ -10,15 +10,13 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Source Completion scripts
+# Azure CLI
+if [[ -s "${ZDOTDIR:-$HOME}/.az.completion" ]]; then
+  source "${ZDOTDIR:-$HOME}/.az.completion"
+fi
 
-expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
-  echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
-  zle expand-or-complete
-  zle redisplay
-}
-zle -N expand-or-complete-with-dots
-bindkey "^I" expand-or-complete-with-dots
+# Customize to your needs...
 
 # Tmux reatach to existing session
 # if [[ -z "$TMUX" ]] ;then
@@ -37,6 +35,17 @@ alias nsftp='sftp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -q
 alias ssh-nokey='ssh -o PubkeyAuthentication=no -q'
 alias bashrc='$EDITOR ~/.bashrc && source ~/.bashrc'
 alias ssh_config='$EDITOR ~/.ssh/config'
-alias diff='colordiff "$@"'
+alias cat='bat'
+#alias diff='colordiff "$@"'
+alias zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
+# Trim new lines and copy to clipboard
+alias c="tr -d '\n' | pbcopy"
 
+# Docker Aliases
 alias dps='docker ps'
+
+# Kubectl Aliases
+alias kctx='kubectx'
+alias kns='kubens'
+alias k='kubectl'
+complete -o default -F __start_kubectl k
