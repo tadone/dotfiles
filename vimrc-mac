@@ -180,6 +180,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'altercation/vim-colors-solarized' " Solarized theme
     Plug 'arcticicestudio/nord-vim' "NORD Theme
     Plug 'joshdick/onedark.vim' "Great Atom inspired theme
+    Plug 'trevordmiller/nova-vim'
     "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets', { 'for': 'sh' } " Snippets
     "Plug 'chriskempson/base16-vim' " Base16 Themes
     "Plug 'scrooloose/nerdtree' " File browser sidebar
@@ -187,7 +188,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'raimondi/delimitmate' " Auto close parenthesis
     Plug 'tpope/vim-surround' " Change parentheses, brackets, quotes, XML tags
     Plug 'scrooloose/syntastic' " Syntax checker
-    Plug 'Shougo/neocomplete' " Auto completion
+    "Plug 'Shougo/neocomplete' " Auto completion
+    Plug 'ajh17/VimCompletesMe' " Auto completion
     Plug 'airblade/vim-gitgutter' " Show Git diff in gutter + and - signs.
 
 " Initialize plugin system
@@ -241,22 +243,23 @@ call plug#end()
 
 colorscheme onedark " Use custom color scheme
 
+"colorscheme nova" Use custom color scheme
 " ----------------------------------------------------------------------
 " | Plugins - NeoComplete                                              |
 " ----------------------------------------------------------------------
 
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+"let g:neocomplete#sources#syntax#min_keyword_length = 3
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+autocmd FileType text,markdown let b:vcm_tab_complete = 'dict'
 " ----------------------------------------------------------------------
 " | Plugins - Syntastic                                                |
 " ----------------------------------------------------------------------

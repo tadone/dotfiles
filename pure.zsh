@@ -3,6 +3,7 @@
 # https://github.com/sindresorhus/pure
 # MIT License
 
+# TO INSTALL:
 # Overwrite ~/.zprezto/modules/prompt/external/pure/pure.zsh with this file
 # Tad Swider
 
@@ -127,6 +128,7 @@ prompt_pure_preprompt_render() {
 
 	preprompt+="%F{248}$(prompt_k8s)%f"
 	# git info
+    #preprompt+="%F{230}$(azure-current-account)%f"
 	preprompt+="%F{$git_color}${vcs_info_msg_0_}${prompt_pure_git_dirty}%f"
 	# git pull/push arrows
 	preprompt+="%F{cyan}${prompt_pure_git_arrows}%f"
@@ -350,6 +352,12 @@ prompt_pure_check_git_arrows() {
 	[[ -n $arrows ]] || return
 	typeset -g REPLY=" $arrows"
 }
+azure-current-account() {
+  if which az > /dev/null; then
+    az_account=`az account show --query name`
+    echo -ne "${az_account}"
+  fi
+}
 
 kubernetes-current-context-info() {
   if which kubectl > /dev/null; then
@@ -357,9 +365,9 @@ kubernetes-current-context-info() {
     cmd="kubectl config view -o jsonpath='{.contexts[?(@.name == \"${cname}\")].context.namespace}'"
     namespace=$(bash -c "${cmd}")
     if [ -n "$namespace" ]; then
-      namespace="/${namespace}"
+      namespace="${namespace}"
     fi
-    echo -ne "${cname}${namespace}"
+    echo -ne "${cname}:${namespace}"
   fi
 }
 
