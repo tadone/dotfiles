@@ -45,7 +45,7 @@ alias zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
 alias c="tr -d '\n' | pbcopy"
 
 # Docker Aliases
-alias dps='docker ps'
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
 # Get container IP
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
