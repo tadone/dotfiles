@@ -50,6 +50,7 @@ alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
 # Kubectl Aliases
+[ $commands[kubectl] ] && source <(kubectl completion zsh)
 alias kctx='kubectx'
 alias kns='kubens'
 alias k='kubectl'
@@ -60,3 +61,6 @@ complete -o default -F __start_kubectl k
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
 echo "Use fd instead of find"
+
+# Add ~/bin to PATH
+export PATH=$PATH:$HOME/Bin
