@@ -20,6 +20,10 @@ bashcompinit
 
 # Customize to your needs...
 export EDITOR=vim
+# Add pip3 user packages to path
+[ -d "$HOME/Library/Python/3.7/bin" ] && export PATH=$PATH:$HOME/Library/Python/3.7/bin
+[ -d "$HOME/bin" ] && export PATH=$PATH:$HOME/bin
+
 
 # Tmux reatach to existing session
 # if [[ -z "$TMUX" ]] ;then
@@ -32,17 +36,13 @@ export EDITOR=vim
 # fi
 
 # Aliases
-alias nssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -q'
-alias nscp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -q'
-
-alias ssh-nokey='ssh -o PubkeyAuthentication=no -q'
-alias bashrc='$EDITOR ~/.bashrc && source ~/.bashrc'
-alias ssh_config='$EDITOR ~/.ssh/config'
+alias sshconfig='$EDITOR ~/.ssh/config'
 which bat &>/dev/null && alias cat='bat'
 #alias diff='colordiff "$@"'
 alias zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
 # Trim new lines and copy to clipboard
 alias c="tr -d '\n' | pbcopy"
+# OSX iClud
 
 # Docker Aliases
 alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
@@ -60,7 +60,12 @@ complete -o default -F __start_kubectl k
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
-echo "Use fd instead of find"
-
 # Add ~/bin to PATH
 export PATH=$PATH:$HOME/Bin
+
+# Small Tools
+[ -f ~/bin/az_fzf.sh ] && alias azenv="~/bin/az_fzf.sh"
+[ -f ~/bin/make_k8s_config.sh ] && alias kube-conf="~/bin/make_k8s_config.sh"
+
+# Personal Messages
+echo "Use fd instead of find; castero for podcasts"
