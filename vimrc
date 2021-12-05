@@ -36,7 +36,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'Valloric/YouCompleteMe'
-Plugin 'davidhalter/jedi-vim'
 
 " Color Themes
 Plugin 'flazz/vim-colorschemes'
@@ -116,11 +115,6 @@ endif
 " do not history when leavy buffer
 set hidden
 
-" FIXME: (broken) ctrl s to save
-noremap  <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <Esc>:update<CR>
-
 set nobackup
 set nowritebackup
 set noswapfile
@@ -137,16 +131,6 @@ set completeopt=menuone,longest,preview
 
 " NERDTree
 nnoremap <S-n> :NERDTreeToggle<CR>
-
-" CtrlP
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-
-" Ultisnip
-" NOTE: <f1> otherwise it overrides <tab> forever
-let g:UltiSnipsExpandTrigger="<f1>"
-let g:UltiSnipsJumpForwardTrigger="<f1>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:did_UltiSnips_vim_after = 1
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -196,8 +180,3 @@ let mapleader = ','
 nnoremap <Leader>p :set paste<CR>
 nnoremap <Leader>o :set nopaste<CR>
 noremap  <Leader>g :GitGutterToggle<CR>
-
-" this machine config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif

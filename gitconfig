@@ -1,0 +1,44 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Tad Swider
+	email = tadeusz.swider@motorolasolutions.com
+[core]
+	editor = code --wait
+	excludesfile = /Users/tadswider/.gitignore
+	preloadindex = true
+	fscache = true
+[gc]
+	auto = 256
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --date=local --stat -p
+	ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lg = log --all --decorate --oneline --graph
+	sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d\
+			&& git remote prune origin
+[color]
+	ui = true
+[push]
+	default = upstream
+[pull]
+    rebase = false
+[web]
+	browser = google-chrome
+[diff]
+   tool = vscode
+[difftool "vscode"]
+   cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
+[github]
+	user = tadone
+	token = token
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true	
+[commit]
+	template = /Users/tadswider/.stCommitMsg
