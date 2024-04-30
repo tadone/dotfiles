@@ -1,0 +1,13 @@
+.DS_Store
+# python-specific
+.venv
+__pycache__
+.direnv
+.python-version
+
+# editor files
+.idea
+.vscode
+
+# direnv secrets
+.env

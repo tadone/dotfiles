@@ -1,12 +1,17 @@
 # This is Git's per-user configuration file.
+# [include]
+#   path = ~/.gitconfig.local
 [user]
 	name = Tad Swider
-	email = tadeusz.swider@motorolasolutions.com
+	email = tad.swider@sproutsocial.com
 [core]
 	editor = code --wait
 	excludesfile = /Users/tadswider/.gitignore
 	preloadindex = true
 	fscache = true
+	pager = delta
+[delta]
+	side-by-side = true
 [gc]
 	auto = 256
 [alias]
@@ -17,9 +22,11 @@
 	hist = log --date=local --stat -p
 	ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	ld = log --graph --pretty=format:'%C(yellow)%h%C(bold white red)%d%Creset %s %C(bold green)%cr %Creset%C(white)%an' --abbrev-commit --date=relative
 	lg = log --all --decorate --oneline --graph
 	sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d\
 			&& git remote prune origin
+	branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
 [color]
 	ui = true
 [push]
@@ -39,6 +46,7 @@
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
-    required = true	
+    required = true
 [commit]
-	template = /Users/tadswider/.stCommitMsg
+	# template = /Users/tadswider/.stCommitMsg
+	# template = ~/.gitmessage
